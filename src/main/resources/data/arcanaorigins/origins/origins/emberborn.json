@@ -1,0 +1,10 @@
+{
+  "name": "origins.arcanaorigins.emberborn.name",
+  "description": "origins.arcanaorigins.emberborn.description",
+  "icon": "minecraft:fire_charge",
+  "impact": "medium",
+  "order": 100,
+  "powers": [
+    "arcanaorigins:emberborn_spark"
+  ]
+}
