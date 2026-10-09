@@ -1,0 +1,7 @@
+{
+  "parent": "arcanaorigins:spell/fireball",
+  "textures": {
+    "fire": "arcanaorigins:block/fireball_heat3",
+    "particle": "arcanaorigins:block/fireball_heat3"
+  }
+}

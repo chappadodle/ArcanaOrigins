@@ -12,6 +12,7 @@ public final class ModPowers {
     private static final DeferredRegister<PowerType<?>> POWER_TYPES = DeferredRegister.create(PowerTypes.REGISTRY_KEY, ArcanaOrigins.MODID);
 
     public static final DeferredHolder<PowerType<?>, SpellPower> SPELL = POWER_TYPES.register("spell", SpellPower::new);
+    public static final DeferredHolder<PowerType<?>, AuraBonusPower> AURA_BONUS = POWER_TYPES.register("aura_bonus", AuraBonusPower::new);
 
     private ModPowers() {
     }

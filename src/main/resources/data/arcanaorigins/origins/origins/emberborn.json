@@ -5,6 +5,11 @@
   "impact": "medium",
   "order": 100,
   "powers": [
-    "arcanaorigins:emberborn_spark"
+    "arcanaorigins:emberborn_fireball",
+    "arcanaorigins:emberborn_ember_sprite",
+    "arcanaorigins:emberborn_pyronado",
+    "arcanaorigins:emberborn_fire_immunity",
+    "arcanaorigins:emberborn_scorch",
+    "arcanaorigins:emberborn_water_weakness"
   ]
 }

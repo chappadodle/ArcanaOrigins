@@ -1,4 +1,4 @@
 # The server starts with NeoOrigins and Arcana Origins; our origins are on the origin layer and
-# their powers load (no errors).
+# their powers load (no errors): Emberborn's six.
 origin list neoorigins:origin
 sleep 1

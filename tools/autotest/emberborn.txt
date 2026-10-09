@@ -1,0 +1,56 @@
+# Emberborn (see the design spec): the origin set by command, then its three spells on the skill
+# keys at a slowed 200-health husk 9 blocks off (shots; the husk's health logged after each), a
+# second Fireball straight after the first (still cooling down: no second blast), and the HUD with
+# the cooldown icons and no mana bar.
+hud on
+cmd time set noon
+cmd weather clear
+cmd gamerule doDaylightCycle false
+cmd gamerule doMobSpawning false
+cmd gamerule mobGriefing false
+cmd gamemode survival
+cmd effect clear @s
+cmd effect give @s minecraft:instant_health 1 10 true
+cmd tp @s 0.5 100 0.5 -90 0
+wait 40
+cmd kill @e[type=!player]
+cmd fill -8 99 -12 30 99 12 minecraft:stone
+cmd fill -8 100 -12 30 110 12 minecraft:air
+cmd origin set @s neoorigins:origin arcanaorigins:emberborn
+wait 20
+screen close
+cmd summon husk 9.5 100 0.5 {PersistenceRequired:1b,Health:200f,attributes:[{id:"minecraft:generic.max_health",base:200d}]}
+cmd effect give @e[type=husk] minecraft:slowness 200 255 true
+cmd effect give @e[type=husk] minecraft:weakness 200 255 true
+wait 10
+cmd tp @s 0.5 100 0.5 -90 3
+wait 5
+# 1. Fireball, then straight away a second (cooling down: nothing).
+skill 1
+wait 2
+skill 1
+wait 4
+shot fireball_flight
+wait 22
+cmd data get entity @e[type=husk,limit=1] Health
+shot fireball_after
+# 2. Ember Sprite where the player looks, spitting bolts at the husk.
+cmd tp @s 0.5 100 0.5 -90 12
+wait 5
+skill 2
+wait 30
+shot ember_sprite
+wait 140
+cmd data get entity @e[type=husk,limit=1] Health
+# 3. Pyronado, with the husk brought close.
+cmd tp @e[type=husk] 3.5 100 0.5
+wait 5
+skill 3
+wait 25
+shot pyronado
+wait 140
+cmd data get entity @e[type=husk,limit=1] Health
+shot hud
+cmd kill @e[type=!player]
+wait 10
+quit

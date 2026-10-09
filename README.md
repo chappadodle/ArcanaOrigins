@@ -20,3 +20,9 @@ Work in progress: see `docs/superpowers/specs/2026-10-09-arcana-origins-design.m
 | Dawnborn | Radiance |
 
 Requires NeoOrigins 2.2.29 or later. MIT licensed.
+
+## Credits
+
+- The spells, their visuals and sounds come from [Elemental Arcana](https://github.com/chappadodle/ElementalArcana)
+  (same author, MIT).
+- Built on [NeoOrigins](https://github.com/CyberDay1/NeoOrigins) by CyberDay1 (MIT).

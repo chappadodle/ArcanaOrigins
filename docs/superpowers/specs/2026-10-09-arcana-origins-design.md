@@ -185,3 +185,36 @@ Read from NeoOrigins' 1.21.1 source (2.2.29):
 - **The dependency:** `maven.modrinth:neo-origins:cA9nVTuh` (2.2.29 for 1.21.1).
 - **Verified:** a dedicated server lists `arcanaorigins:emberborn` on the origin layer, with our
   `arcanaorigins:spell` power loaded.
+
+## M1 notes (2026-10-09): the core and Emberborn
+
+- **Layout:** the code keeps Elemental Arcana's package layout (`api/`, `content/`, `client/`), so
+  later spells port with `tools/port_from_ea.py` (it renames packages, the mod class and the
+  central registry, `ModContent` → `ModMagic`). New here: `magic/` (the `Spell` interface and the
+  `Spells` table by name), `power/` (our NeoOrigins power types), `api/Origins` (the eight
+  origins' elements), `api/ProjectileSpells`.
+- **Spells:** each is a `Spell` (`cast(ServerPlayer)`, at one fixed strength). Projectile spells
+  also implement the trimmed `ProjectileSpell` and fly as the trimmed `SpellProjectile`: thrown at
+  once from the right hand toward the crosshair (from the eyes, its glow filled the screen), never
+  held or charged.
+- **Registration order matters:** `Spells.bootstrap()` runs in the mod's constructor, so the
+  projectile spells (and the 3D models the client loads for them) exist before the model bake;
+  otherwise the projectile renders as the missing-model cube.
+- **The chart in PvP:** a player carries their Arcana origin's element (`CreatureElements`), so
+  Fire into a Tideborn is resisted and into a Rimeborn strong.
+- **Who's spared:** area spells spare your pets and villagers, and hit other players only where
+  the server allows PvP (`SpellTargets`).
+- **Power types:** `arcanaorigins:spell` (an active: `spell`, `cooldown_ticks`,
+  `cooldown_icon`) and `arcanaorigins:aura_bonus` (a passive: your hits on a foe carrying an
+  element, `pyro`, `hydro` or `cryo`, are `multiplier` times as hard; Emberborn's Scorch).
+- **Emberborn:**
+  - Fireball: 7 damage, a 2.5-block blast, 5 s burning, 1.5 s cooldown.
+  - Ember Sprite: 20 s cooldown.
+  - Pyronado: 5 a sweep (Elemental Arcana's 3 grew with spell power), 60 s cooldown.
+  - Born of Fire (`neoorigins:prevent_action` fire), Scorch (+25% on burning foes), Quenched
+    (`neoorigins:damage_in_water` with rain).
+- **Tests:** `tools/autotest/emberborn.txt` presses the real skill keys (the AutoTest `skill <n>`
+  step sends NeoOrigins' `ActivatePowerPayload`). Measured on a 200-health husk: Fireball 8,
+  Ember Sprite 15, Pyronado 7 (its wheels shove the foe out of their orbit: it's a ring to keep
+  foes off). A second press inside the cooldown does nothing. The HUD shows the cooldown icons on
+  V, G and N, and no mana bar.
