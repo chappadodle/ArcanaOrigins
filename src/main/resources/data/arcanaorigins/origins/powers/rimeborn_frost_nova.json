@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "frost_nova",
+  "cooldown_ticks": 900,
+  "cooldown_icon": "minecraft:powder_snow_bucket"
+}

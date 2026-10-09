@@ -218,3 +218,37 @@ Read from NeoOrigins' 1.21.1 source (2.2.29):
   Ember Sprite 15, Pyronado 7 (its wheels shove the foe out of their orbit: it's a ring to keep
   foes off). A second press inside the cooldown does nothing. The HUD shows the cooldown icons on
   V, G and N, and no mana bar.
+
+## M2 notes (2026-10-09): Tideborn and Rimeborn
+
+- **Ported systems:**
+  - the magic shield (`SpellShield`, `ShieldSpell`, `ShieldEvents`; the shield stores its spell
+    by name) and its client (shards, shield hearts);
+  - Bubble Prison (`BubblePrisons`, renderer);
+  - the frozen shell (`FrozenState` keeps the synced `frozen_until` in step with Frozen);
+  - Tsunami (`Tsunamis`, `GroundPath`);
+  - the Hydro Jet's stream visuals (`WaterBeams`, `HydroStreamOptions`, water cubes);
+  - the icicle and its shatter.
+
+  New: `core/MagicAttachments` (shield, bubble, frozen_until only).
+- **Hydro Jet:** a tap sprays for 1.5 s, following the caster's aim (NeoOrigins keys are taps;
+  `HydroJetSpell` ticks the sprays itself). Range 16, 1.5 a hit every 4 ticks, soaks, pushes,
+  splashes and douses fires, at Elemental Arcana's Surge look.
+- **Icicle:** one icicle, speed 2.4, 6 damage, pierces one foe. It frosts (the vanilla freeze)
+  and slows, Freezes the wet, and freezes water where it lands.
+- **Frost Shield:** Elemental Arcana's, raised at its level 4 (absorbs 10 for 10 s, Cold Touch,
+  Ice Parry).
+- **Frost Nova (the ultimate):** radius 6, 6 damage, and Freezes everything it may touch.
+- **Bubble Prison and Tsunami:** as Elemental Arcana had them. Each fails without taking a
+  cooldown when it has no target or no room (`execute` returns false).
+- **New passive:** `arcanaorigins:frost_walk` (water freezes under you; not while sneaking).
+- **Dropped:** walking on powder snow (vanilla only allows it for leather boots or an entity type
+  tag, which needs a mixin for players).
+- **Passives from NeoOrigins' JSON:** water breathing, swim speed in water, Regeneration in rain
+  (`persistent_effect` + `in_rain`), slowness in hot or dry biomes and in the Nether
+  (`attribute_modifier` + `location_condition`), freeze immunity, and fire damage ×1.5
+  (`modify_damage` on `#minecraft:is_fire`).
+- **Measured (200-health husk):**
+  - Tideborn: Hydro Jet 12 (and Wet), Bubble Prison traps, Tsunami 4.
+  - Rimeborn: Icicle 7, Frost Nova 7, leaving the husk Frozen in its shell.
+  - Frost Walker froze a pool's edge.

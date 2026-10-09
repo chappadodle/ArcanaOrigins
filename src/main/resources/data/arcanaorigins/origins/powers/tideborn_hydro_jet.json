@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "hydro_jet",
+  "cooldown_ticks": 60,
+  "cooldown_icon": "minecraft:water_bucket"
+}

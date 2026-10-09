@@ -1,0 +1,10 @@
+{
+  "type": "neoorigins:persistent_effect",
+  "effect": "minecraft:regeneration",
+  "amplifier": 0,
+  "toggleable": false,
+  "show_icon": false,
+  "condition": {
+    "type": "neoorigins:in_rain"
+  }
+}

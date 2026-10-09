@@ -1,6 +1,7 @@
 package com.chappadodle.arcanaorigins;
 
 import com.chappadodle.arcanaorigins.content.ModMagic;
+import com.chappadodle.arcanaorigins.core.MagicAttachments;
 import com.chappadodle.arcanaorigins.magic.Spells;
 import com.chappadodle.arcanaorigins.power.ModPowers;
 import net.minecraft.resources.ResourceLocation;
@@ -25,6 +26,7 @@ public class ArcanaOrigins {
         modContainer.registerConfig(net.neoforged.fml.config.ModConfig.Type.CLIENT, com.chappadodle.arcanaorigins.client.ArcanaClientConfig.SPEC);
         Spells.bootstrap();
         ModMagic.register(modEventBus);
+        MagicAttachments.ATTACHMENT_TYPES.register(modEventBus);
         ModPowers.register(modEventBus);
     }
 }

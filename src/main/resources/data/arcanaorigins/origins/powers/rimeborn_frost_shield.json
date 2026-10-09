@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "frost_shield",
+  "cooldown_ticks": 400,
+  "cooldown_icon": "minecraft:blue_ice"
+}

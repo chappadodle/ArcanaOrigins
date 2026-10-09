@@ -1,0 +1,7 @@
+{
+  "parent": "arcanaorigins:spell/icicle",
+  "textures": {
+    "ice": "arcanaorigins:block/icicle_frost3",
+    "particle": "arcanaorigins:block/icicle_frost3"
+  }
+}

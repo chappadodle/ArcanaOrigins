@@ -1,0 +1,16 @@
+{
+  "spell.icicle.impact": {
+    "sounds": [
+      {
+        "name": "arcanaorigins:spell/icicle/impact1"
+      },
+      {
+        "name": "arcanaorigins:spell/icicle/impact2"
+      },
+      {
+        "name": "arcanaorigins:spell/icicle/impact3"
+      }
+    ],
+    "subtitle": "subtitles.arcanaorigins.spell.icicle.impact"
+  }
+}

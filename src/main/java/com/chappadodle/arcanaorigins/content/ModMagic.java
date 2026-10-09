@@ -85,9 +85,30 @@ public final class ModMagic {
     /** A fireball's whole explosion in one particle (see FireBlastOptions). */
     public static final DeferredHolder<ParticleType<?>, ParticleType<FireBlastOptions>> FIRE_BLAST =
             PARTICLES.register("fire_blast", FireBlastOptions::newType);
+    /** A water droplet that flies along its velocity, sags a little and fades. */
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> HYDRO_DROP =
+            PARTICLES.register("hydro_drop", () -> new SimpleParticleType(false));
+    /** Hydro Jet's stream, one tick of it in one packet (see HydroStreamOptions). */
+    public static final DeferredHolder<ParticleType<?>, ParticleType<HydroStreamOptions>> HYDRO_STREAM =
+            PARTICLES.register("hydro_stream", HydroStreamOptions::newType);
+    /** A burst of water cubes (see WaterBurstOptions). */
+    public static final DeferredHolder<ParticleType<?>, ParticleType<WaterBurstOptions>> WATER_BURST =
+            PARTICLES.register("water_burst", WaterBurstOptions::newType);
+    /** Tsunami's wave, for as long as it rolls, in one particle (see TsunamiOptions). */
+    public static final DeferredHolder<ParticleType<?>, ParticleType<TsunamiOptions>> TSUNAMI =
+            PARTICLES.register("tsunami", TsunamiOptions::newType);
+    /** An icicle's whole shatter in one particle (see IceShatterOptions). */
+    public static final DeferredHolder<ParticleType<?>, ParticleType<IceShatterOptions>> ICE_SHATTER =
+            PARTICLES.register("ice_shatter", IceShatterOptions::newType);
+    /** Bubble Prison's cast: a stream of bubbles from the hand to the target (BubbleCastEmitter). */
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> BUBBLE_CAST =
+            PARTICLES.register("bubble_cast", () -> new SimpleParticleType(false));
     /** Pyronado's wheels, for as long as they spin, in one particle (see PyronadoOptions). */
     public static final DeferredHolder<ParticleType<?>, ParticleType<PyronadoOptions>> PYRONADO =
             PARTICLES.register("pyronado", PyronadoOptions::newType);
+
+    /** An icicle shattering: Elemental Arcana's one synthesized sound the player kept (tools/gen_sounds). */
+    public static final DeferredHolder<SoundEvent, SoundEvent> ICICLE_IMPACT = sound("spell.icicle.impact");
 
     /** Frozen solid (the Freeze reaction): rooted in place, no jumping or melee damage. */
     public static final DeferredHolder<MobEffect, FrozenEffect> FROZEN = EFFECTS.register("frozen", FrozenEffect::new);
@@ -97,7 +118,6 @@ public final class ModMagic {
     private ModMagic() {
     }
 
-    @SuppressWarnings("unused")
     private static DeferredHolder<SoundEvent, SoundEvent> sound(String name) {
         return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(ArcanaOrigins.id(name)));
     }

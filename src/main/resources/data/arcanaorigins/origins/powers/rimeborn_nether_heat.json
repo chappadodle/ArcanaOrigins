@@ -1,0 +1,9 @@
+{
+  "type": "neoorigins:attribute_modifier",
+  "attribute": "minecraft:generic.movement_speed",
+  "amount": -0.15,
+  "operation": "add_multiplied_base",
+  "location_condition": {
+    "dimension": "minecraft:the_nether"
+  }
+}

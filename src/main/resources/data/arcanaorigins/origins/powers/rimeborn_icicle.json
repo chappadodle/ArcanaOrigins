@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "icicle",
+  "cooldown_ticks": 20,
+  "cooldown_icon": "minecraft:packed_ice"
+}

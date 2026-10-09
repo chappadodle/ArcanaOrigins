@@ -1,0 +1,17 @@
+{
+  "name": "origins.arcanaorigins.tideborn.name",
+  "description": "origins.arcanaorigins.tideborn.description",
+  "icon": "minecraft:heart_of_the_sea",
+  "impact": "medium",
+  "order": 101,
+  "powers": [
+    "arcanaorigins:tideborn_hydro_jet",
+    "arcanaorigins:tideborn_bubble_prison",
+    "arcanaorigins:tideborn_tsunami",
+    "arcanaorigins:tideborn_water_breathing",
+    "arcanaorigins:tideborn_swim_speed",
+    "arcanaorigins:tideborn_rain_regen",
+    "arcanaorigins:tideborn_dry_heat",
+    "arcanaorigins:tideborn_nether_heat"
+  ]
+}

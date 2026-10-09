@@ -1,10 +1,22 @@
 package com.chappadodle.arcanaorigins.client;
 
+import com.chappadodle.arcanaorigins.client.particle.HydroDropParticle;
+import com.chappadodle.arcanaorigins.client.particle.HydroStreamEmitter;
+import com.chappadodle.arcanaorigins.client.particle.TsunamiParticle;
+import com.chappadodle.arcanaorigins.client.particle.WaterBurstParticle;
+import com.chappadodle.arcanaorigins.client.visual.WaterBeams;
+import com.chappadodle.arcanaorigins.api.ShieldSpell;
+import com.chappadodle.arcanaorigins.magic.Spells;
+import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.client.event.RenderLivingEvent;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import com.chappadodle.arcanaorigins.ArcanaOrigins;
 import com.chappadodle.arcanaorigins.api.ProjectileSpell;
 import com.chappadodle.arcanaorigins.api.ProjectileSpells;
 import com.chappadodle.arcanaorigins.client.decal.Decals;
+import com.chappadodle.arcanaorigins.client.particle.BubbleCastEmitter;
 import com.chappadodle.arcanaorigins.client.particle.CinderParticle;
+import com.chappadodle.arcanaorigins.client.particle.IceShatterEmitter;
 import com.chappadodle.arcanaorigins.client.particle.EmberParticle;
 import com.chappadodle.arcanaorigins.client.particle.FireBlastEmitter;
 import com.chappadodle.arcanaorigins.client.particle.FrostMistParticle;
@@ -62,6 +74,12 @@ public final class ArcanaOriginsClient {
             event.registerSpriteSet(ModMagic.CORONA.get(), sprites -> new GlowParticle.Provider(GlowParticle.Kind.CORONA, sprites));
             event.registerSpecial(ModMagic.FIRE_BLAST.get(), new FireBlastEmitter.Provider());
             event.registerSpecial(ModMagic.PYRONADO.get(), new PyronadoEmitter.Provider());
+            event.registerSpecial(ModMagic.ICE_SHATTER.get(), new IceShatterEmitter.Provider());
+            event.registerSpriteSet(ModMagic.HYDRO_DROP.get(), HydroDropParticle.Provider::new);
+            event.registerSpecial(ModMagic.HYDRO_STREAM.get(), new HydroStreamEmitter.Provider());
+            event.registerSpecial(ModMagic.WATER_BURST.get(), new WaterBurstParticle.Provider());
+            event.registerSpecial(ModMagic.TSUNAMI.get(), new TsunamiParticle.Provider());
+            event.registerSpecial(ModMagic.BUBBLE_CAST.get(), new BubbleCastEmitter.Provider());
         }
 
         /** Every projectile spell's 3D models. */
@@ -70,6 +88,12 @@ public final class ArcanaOriginsClient {
             Set<ResourceLocation> models = new HashSet<>();
             for (ProjectileSpell spell : ProjectileSpells.all()) {
                 models.addAll(spell.models());
+            }
+            // Shield spells' orbiting shards.
+            for (String name : Spells.names()) {
+                if (Spells.get(name) instanceof ShieldSpell shield && shield.shardModel() != null) {
+                    models.add(shield.shardModel());
+                }
             }
             models.forEach(model -> event.register(ModelResourceLocation.standalone(model)));
         }
@@ -82,6 +106,7 @@ public final class ArcanaOriginsClient {
         @SubscribeEvent
         public static void registerGuiLayers(RegisterGuiLayersEvent event) {
             event.registerAboveAll(ArcanaOrigins.id("screen_flash"), ScreenEffects.FLASH_LAYER);
+            event.registerAbove(VanillaGuiLayers.PLAYER_HEALTH, ArcanaOrigins.id("shield_hearts"), new ShieldHeartsLayer());
         }
     }
 
@@ -89,6 +114,15 @@ public final class ArcanaOriginsClient {
     @EventBusSubscriber(modid = ArcanaOrigins.MODID, value = Dist.CLIENT)
     public static final class Frame {
         private Frame() {
+        }
+
+        @SubscribeEvent
+        public static void onRenderLiving(RenderLivingEvent.Post<?, ?> event) {
+            if (event.getEntity() instanceof Player player) {
+                ShieldRenderer.renderShards(player, event.getPartialTick(), event.getPoseStack(), event.getMultiBufferSource());
+            }
+            BubbleRenderer.render(event.getEntity(), event.getPartialTick(), event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight());
+            FrozenShells.render(event.getEntity(), event.getPartialTick(), event.getPoseStack(), event.getMultiBufferSource());
         }
 
         @SubscribeEvent
@@ -102,6 +136,9 @@ public final class ArcanaOriginsClient {
         public static void afterParticles(RenderLevelStageEvent event) {
             if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_CUTOUT_BLOCKS) {
                 Decals.render(event);
+            }
+            if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) {
+                WaterBeams.render(event);
             }
             if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
                 RenderSystem.defaultBlendFunc();

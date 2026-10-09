@@ -2,7 +2,13 @@ package com.chappadodle.arcanaorigins.magic;
 
 import com.chappadodle.arcanaorigins.ArcanaOrigins;
 import com.chappadodle.arcanaorigins.api.ProjectileSpells;
+import com.chappadodle.arcanaorigins.content.spell.BubblePrisonSpell;
 import com.chappadodle.arcanaorigins.content.spell.EmberSpriteSpell;
+import com.chappadodle.arcanaorigins.content.spell.FrostNovaSpell;
+import com.chappadodle.arcanaorigins.content.spell.HydroJetSpell;
+import com.chappadodle.arcanaorigins.content.spell.TsunamiSpell;
+import com.chappadodle.arcanaorigins.content.spell.FrostShieldSpell;
+import com.chappadodle.arcanaorigins.content.spell.IcicleSpell;
 import com.chappadodle.arcanaorigins.content.spell.FireballSpell;
 import com.chappadodle.arcanaorigins.content.spell.PyronadoSpell;
 import net.minecraft.core.particles.ParticleTypes;
@@ -25,6 +31,14 @@ public final class Spells {
         register(FireballSpell.NAME, ProjectileSpells.register(new FireballSpell()));
         register("ember_sprite", new EmberSpriteSpell());
         register("pyronado", new PyronadoSpell());
+        // Rimeborn (Ice).
+        register(IcicleSpell.NAME, ProjectileSpells.register(new IcicleSpell()));
+        register(FrostShieldSpell.NAME, new FrostShieldSpell());
+        register("frost_nova", new FrostNovaSpell());
+        // Tideborn (Water).
+        register("hydro_jet", new HydroJetSpell());
+        register("bubble_prison", new BubblePrisonSpell());
+        register("tsunami", new TsunamiSpell());
         // A test spell: a puff of sparks and a log line (tools/server_tests check the wiring with it).
         register("spark", caster -> {
             caster.serverLevel().sendParticles(ParticleTypes.ELECTRIC_SPARK, caster.getX(), caster.getEyeY(), caster.getZ(),

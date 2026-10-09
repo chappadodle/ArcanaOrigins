@@ -1,0 +1,17 @@
+{
+  "name": "origins.arcanaorigins.rimeborn.name",
+  "description": "origins.arcanaorigins.rimeborn.description",
+  "icon": "minecraft:blue_ice",
+  "impact": "medium",
+  "order": 102,
+  "powers": [
+    "arcanaorigins:rimeborn_icicle",
+    "arcanaorigins:rimeborn_frost_shield",
+    "arcanaorigins:rimeborn_frost_nova",
+    "arcanaorigins:rimeborn_freeze_immunity",
+    "arcanaorigins:rimeborn_frost_walk",
+    "arcanaorigins:rimeborn_fire_weakness",
+    "arcanaorigins:rimeborn_heat",
+    "arcanaorigins:rimeborn_nether_heat"
+  ]
+}

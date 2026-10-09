@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "tsunami",
+  "cooldown_ticks": 1200,
+  "cooldown_icon": "minecraft:trident"
+}

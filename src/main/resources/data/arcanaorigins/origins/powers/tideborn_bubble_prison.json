@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "bubble_prison",
+  "cooldown_ticks": 300,
+  "cooldown_icon": "minecraft:prismarine_crystals"
+}
