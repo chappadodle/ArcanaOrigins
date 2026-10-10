@@ -2,6 +2,15 @@ package com.chappadodle.arcanaorigins.magic;
 
 import com.chappadodle.arcanaorigins.ArcanaOrigins;
 import com.chappadodle.arcanaorigins.api.ProjectileSpells;
+import com.chappadodle.arcanaorigins.content.spell.PrismBoltSpell;
+import com.chappadodle.arcanaorigins.content.spell.PrismWardSpell;
+import com.chappadodle.arcanaorigins.content.spell.GeodeSentinelSpell;
+import com.chappadodle.arcanaorigins.content.spell.SmiteSpell;
+import com.chappadodle.arcanaorigins.content.spell.SanctuarySpell;
+import com.chappadodle.arcanaorigins.content.spell.DawnbreakSpell;
+import com.chappadodle.arcanaorigins.content.spell.ChainLightningSpell;
+import com.chappadodle.arcanaorigins.content.spell.ThunderclapSpell;
+import com.chappadodle.arcanaorigins.content.spell.StormcallSpell;
 import com.chappadodle.arcanaorigins.content.spell.WindBladeSpell;
 import com.chappadodle.arcanaorigins.content.spell.GaleDashSpell;
 import com.chappadodle.arcanaorigins.content.spell.StormeyeSpell;
@@ -53,6 +62,18 @@ public final class Spells {
         register(BoulderSpell.NAME, ProjectileSpells.register(new BoulderSpell()));
         register(StoneSkinSpell.NAME, new StoneSkinSpell());
         register(TremorSpell.NAME, new TremorSpell());
+        // Stormborn (Lightning).
+        register(ChainLightningSpell.NAME, new ChainLightningSpell());
+        register(ThunderclapSpell.NAME, new ThunderclapSpell());
+        register(StormcallSpell.NAME, new StormcallSpell());
+        // Prismborn (Crystal).
+        register(PrismBoltSpell.NAME, ProjectileSpells.register(new PrismBoltSpell()));
+        register(PrismWardSpell.NAME, new PrismWardSpell());
+        register(GeodeSentinelSpell.NAME, new GeodeSentinelSpell());
+        // Dawnborn (Radiance).
+        register(SmiteSpell.NAME, new SmiteSpell());
+        register(SanctuarySpell.NAME, new SanctuarySpell());
+        register(DawnbreakSpell.NAME, new DawnbreakSpell());
         // A test spell: a puff of sparks and a log line (tools/server_tests check the wiring with it).
         register("spark", caster -> {
             caster.serverLevel().sendParticles(ParticleTypes.ELECTRIC_SPARK, caster.getX(), caster.getEyeY(), caster.getZ(),

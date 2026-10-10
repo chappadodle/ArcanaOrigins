@@ -26,6 +26,10 @@ import com.chappadodle.arcanaorigins.client.particle.IceShardParticle;
 import com.chappadodle.arcanaorigins.client.particle.PyronadoEmitter;
 import com.chappadodle.arcanaorigins.client.particle.WindStreakParticle;
 import com.chappadodle.arcanaorigins.client.particle.TremorEmitter;
+import com.chappadodle.arcanaorigins.client.particle.LightningArcParticle;
+import com.chappadodle.arcanaorigins.client.particle.StormcloudParticle;
+import com.chappadodle.arcanaorigins.client.particle.DawnSunParticle;
+import com.chappadodle.arcanaorigins.client.particle.SmiteParticle;
 import com.chappadodle.arcanaorigins.client.particle.WindCutEmitter;
 import com.chappadodle.arcanaorigins.client.visual.ProjectileVisuals;
 import com.chappadodle.arcanaorigins.client.visual.WindSlashRenderer;
@@ -70,6 +74,7 @@ public final class ArcanaOriginsClient {
             event.registerEntityRenderer(ModMagic.SPELL_PROJECTILE.get(), SpellProjectileRenderer::new);
             event.registerEntityRenderer(ModMagic.EMBER_SPRITE.get(), EmberSpriteRenderer::new);
             event.registerEntityRenderer(ModMagic.STORMEYE.get(), StormeyeRenderer::new);
+            event.registerEntityRenderer(ModMagic.GEODE_SENTINEL.get(), GeodeSentinelRenderer::new);
         }
 
         @SubscribeEvent
@@ -82,6 +87,10 @@ public final class ArcanaOriginsClient {
             event.registerSpriteSet(ModMagic.WIND_STREAK.get(), WindStreakParticle.Provider::new);
             event.registerSpecial(ModMagic.WIND_CUT.get(), new WindCutEmitter.Provider());
             event.registerSpecial(ModMagic.TREMOR.get(), new TremorEmitter.Provider());
+            event.registerSpriteSet(ModMagic.ARC.get(), LightningArcParticle.Provider::new);
+            event.registerSpecial(ModMagic.STORMCLOUD.get(), new StormcloudParticle.Provider());
+            event.registerSpriteSet(ModMagic.SMITE.get(), SmiteParticle.Provider::new);
+            event.registerSpecial(ModMagic.DAWN_SUN.get(), new DawnSunParticle.Provider());
             event.registerSpriteSet(ModMagic.FLARE.get(), sprites -> new GlowParticle.Provider(GlowParticle.Kind.FLARE, sprites));
             event.registerSpriteSet(ModMagic.SPARK.get(), sprites -> new GlowParticle.Provider(GlowParticle.Kind.SPARK, sprites));
             event.registerSpriteSet(ModMagic.FEATHER.get(), sprites -> new GlowParticle.Provider(GlowParticle.Kind.FEATHER, sprites));
@@ -155,6 +164,7 @@ public final class ArcanaOriginsClient {
             }
             if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) {
                 WaterBeams.render(event);
+                OreSenseRenderer.render(event);
             }
             if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
                 RenderSystem.defaultBlendFunc();

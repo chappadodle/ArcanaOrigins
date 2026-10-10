@@ -1,0 +1,10 @@
+{
+  "type": "neoorigins:persistent_effect",
+  "effect": "minecraft:speed",
+  "amplifier": 1,
+  "toggleable": false,
+  "show_icon": false,
+  "condition": {
+    "type": "neoorigins:thundering"
+  }
+}

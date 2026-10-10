@@ -1,0 +1,62 @@
+# Dawnborn (see the design spec): Smite on a slowed 200-health husk (undead: hit hardest, set
+# alight), Sanctuary and Dawnbreak (shots), and Daylight Soul: a husk beside the player catches
+# fire. Health logged after each.
+hud on
+cmd time set noon
+cmd weather clear
+cmd gamerule doDaylightCycle false
+cmd gamerule doMobSpawning false
+cmd gamerule mobGriefing false
+cmd gamemode survival
+cmd effect clear @s
+cmd effect give @s minecraft:instant_health 1 10 true
+cmd tp @s 0.5 100 0.5 -90 0
+wait 40
+cmd kill @e[type=!player]
+cmd fill -8 99 -12 30 99 12 minecraft:stone
+cmd fill -8 100 -12 30 110 12 minecraft:air
+cmd origin set @s neoorigins:origin arcanaorigins:dawnborn
+wait 20
+screen close
+cmd summon husk 9.5 100 0.5 {PersistenceRequired:1b,Health:200f,attributes:[{id:"minecraft:generic.max_health",base:200d}]}
+cmd effect give @e[type=husk] minecraft:slowness 200 255 true
+cmd effect give @e[type=husk] minecraft:weakness 200 255 true
+wait 10
+cmd tp @s 0.5 100 0.5 -90 3
+wait 5
+# 1. Smite.
+cmd tp @s 0.5 100 0.5 -90 8
+skill 1
+wait 8
+shot smite
+wait 15
+cmd execute as @e[type=husk] run data get entity @s Health
+cmd effect clear @e[type=husk] minecraft:glowing
+# 2. Sanctuary, hurt first so it mends.
+cmd damage @s 8 minecraft:generic
+cmd data get entity @s Health
+skill 2
+camera back
+wait 40
+shot sanctuary
+camera first
+cmd data get entity @s Health
+# 3. Dawnbreak, the husk within its 10 blocks.
+cmd tp @e[type=husk] 5.5 100 0.5
+cmd tp @s 0.5 100 0.5 -90 -20
+wait 5
+skill 3
+wait 50
+shot dawnbreak
+wait 40
+cmd execute as @e[type=husk] run data get entity @s Health
+# 4. Daylight Soul: a fresh husk beside the player.
+cmd kill @e[type=husk]
+wait 280
+cmd summon husk 2.5 100 0.5 {PersistenceRequired:1b,Health:200f,attributes:[{id:"minecraft:generic.max_health",base:200d}]}
+cmd effect give @e[type=husk] minecraft:slowness 200 255 true
+wait 25
+cmd execute as @e[type=husk] run data get entity @s Fire
+cmd kill @e[type=!player]
+wait 10
+quit

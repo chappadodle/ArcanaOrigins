@@ -1,0 +1,5 @@
+{
+  "type": "neoorigins:damage_in_water",
+  "damage_per_second": 1.0,
+  "include_rain": false
+}

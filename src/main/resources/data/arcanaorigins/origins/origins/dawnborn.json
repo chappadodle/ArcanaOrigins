@@ -1,0 +1,15 @@
+{
+  "name": "origins.arcanaorigins.dawnborn.name",
+  "description": "origins.arcanaorigins.dawnborn.description",
+  "icon": "minecraft:sunflower",
+  "impact": "medium",
+  "order": 107,
+  "powers": [
+    "arcanaorigins:dawnborn_smite",
+    "arcanaorigins:dawnborn_sanctuary",
+    "arcanaorigins:dawnborn_dawnbreak",
+    "arcanaorigins:dawnborn_sunlit",
+    "arcanaorigins:dawnborn_undead_bane",
+    "arcanaorigins:dawnborn_dusk"
+  ]
+}

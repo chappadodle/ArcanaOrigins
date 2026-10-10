@@ -4,6 +4,8 @@ import com.chappadodle.arcanaorigins.ArcanaOrigins;
 import com.chappadodle.arcanaorigins.api.SpellProjectile;
 import com.chappadodle.arcanaorigins.content.spell.EmberSprite;
 import com.chappadodle.arcanaorigins.content.spell.StormeyeEntity;
+import com.chappadodle.arcanaorigins.content.spell.GeodeSentinel;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleType;
@@ -44,6 +46,11 @@ public final class ModMagic {
             ENTITY_TYPES.register("stormeye", () -> EntityType.Builder.<StormeyeEntity>of(StormeyeEntity::new, MobCategory.MISC)
                     .sized(1f, 2f).clientTrackingRange(10).updateInterval(2).fireImmune().noSave()
                     .build(ArcanaOrigins.MODID + ":stormeye"));
+    /** Prismborn's Geode Sentinel (see GeodeSentinel): never saved. */
+    public static final DeferredHolder<EntityType<?>, EntityType<GeodeSentinel>> GEODE_SENTINEL =
+            ENTITY_TYPES.register("geode_sentinel", () -> EntityType.Builder.<GeodeSentinel>of(GeodeSentinel::new, MobCategory.MISC)
+                    .sized(1.2f, 2.6f).clientTrackingRange(10).updateInterval(5).fireImmune().noSave()
+                    .build(ArcanaOrigins.MODID + ":geode_sentinel"));
 
     /** A glowing 4-point frost glint that twinkles out. */
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FROST_SPARKLE =
@@ -66,6 +73,18 @@ public final class ModMagic {
     /** A Tremor's front, for as long as it runs, in one particle (see TremorOptions). */
     public static final DeferredHolder<ParticleType<?>, ParticleType<TremorOptions>> TREMOR =
             PARTICLES.register("tremor", TremorOptions::newType);
+    /** A bolt of lightning, drawn on each client (see ArcOptions). */
+    public static final DeferredHolder<ParticleType<?>, ParticleType<ArcOptions>> ARC =
+            PARTICLES.register("arc", ArcOptions::newType);
+    /** Stormcall's cloud, for as long as it lasts, in one particle (see StormcloudOptions). */
+    public static final DeferredHolder<ParticleType<?>, ParticleType<StormcloudOptions>> STORMCLOUD =
+            PARTICLES.register("stormcloud", StormcloudOptions::newType);
+    /** Smite's pillar of light, in one particle (see SmiteOptions). */
+    public static final DeferredHolder<ParticleType<?>, ParticleType<SmiteOptions>> SMITE =
+            PARTICLES.register("smite", SmiteOptions::newType);
+    /** Dawnbreak's sun, for as long as it shines, in one particle (see DawnbreakOptions). */
+    public static final DeferredHolder<ParticleType<?>, ParticleType<DawnbreakOptions>> DAWN_SUN =
+            PARTICLES.register("dawn_sun", DawnbreakOptions::newType);
     /** A wind curl tinted with an element's color, for Swirl rings. */
     public static final DeferredHolder<ParticleType<?>, ParticleType<ColorParticleOption>> SWIRL =
             PARTICLES.register("swirl", () -> new ParticleType<ColorParticleOption>(false) {
@@ -142,5 +161,10 @@ public final class ModMagic {
         SOUNDS.register(modEventBus);
         EFFECTS.register(modEventBus);
         PARTICLES.register(modEventBus);
+        modEventBus.addListener(ModMagic::registerAttributes);
+    }
+
+    private static void registerAttributes(EntityAttributeCreationEvent event) {
+        event.put(GEODE_SENTINEL.get(), GeodeSentinel.createAttributes().build());
     }
 }

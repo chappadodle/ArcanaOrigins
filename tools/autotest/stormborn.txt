@@ -1,0 +1,59 @@
+# Stormborn (see the design spec): Chain Lightning at three slowed 200-health husks in a row (it
+# should jump through all three), Thunderclap with them close, and Stormcall over them (shots; health
+# logged after each).
+hud on
+cmd time set noon
+cmd weather clear
+cmd gamerule doDaylightCycle false
+cmd gamerule doMobSpawning false
+cmd gamerule mobGriefing false
+cmd gamemode survival
+cmd effect clear @s
+cmd effect give @s minecraft:instant_health 1 10 true
+cmd tp @s 0.5 100 0.5 -90 0
+wait 40
+cmd kill @e[type=!player]
+cmd fill -8 99 -12 30 99 12 minecraft:stone
+cmd fill -8 100 -12 30 110 12 minecraft:air
+cmd origin set @s neoorigins:origin arcanaorigins:stormborn
+wait 20
+screen close
+cmd summon husk 9.5 100 0.5 {PersistenceRequired:1b,Health:200f,attributes:[{id:"minecraft:generic.max_health",base:200d}]}
+cmd effect give @e[type=husk] minecraft:slowness 200 255 true
+cmd effect give @e[type=husk] minecraft:weakness 200 255 true
+wait 10
+cmd tp @s 0.5 100 0.5 -90 3
+wait 5
+cmd summon husk 12.5 100 2.5 {PersistenceRequired:1b,Health:200f,attributes:[{id:"minecraft:generic.max_health",base:200d}]}
+cmd summon husk 14.5 100 -2.5 {PersistenceRequired:1b,Health:200f,attributes:[{id:"minecraft:generic.max_health",base:200d}]}
+cmd effect give @e[type=husk] minecraft:slowness 200 255 true
+cmd effect give @e[type=husk] minecraft:weakness 200 255 true
+wait 5
+# 1. Chain Lightning.
+skill 1
+wait 2
+shot chain_lightning
+wait 20
+cmd execute as @e[type=husk] run data get entity @s Health
+# 2. Thunderclap, the husks brought close.
+cmd tp @e[type=husk] 3.5 100 0.5
+wait 5
+skill 2
+wait 3
+shot thunderclap
+wait 20
+cmd execute as @e[type=husk] run data get entity @s Health
+# 3. Stormcall, from behind.
+cmd tp @e[type=husk] 5.5 100 2.5
+cmd tp @s 0.5 100 0.5 -90 10
+wait 5
+skill 3
+camera back
+wait 40
+shot stormcall
+wait 120
+camera first
+cmd execute as @e[type=husk] run data get entity @s Health
+cmd kill @e[type=!player]
+wait 10
+quit

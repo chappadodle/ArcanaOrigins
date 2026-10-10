@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "chain_lightning",
+  "cooldown_ticks": 40,
+  "cooldown_icon": "minecraft:lightning_rod"
+}

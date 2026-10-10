@@ -297,3 +297,52 @@ Read from NeoOrigins' 1.21.1 source (2.2.29):
     - Boulder 8; Stone Skin took armour from 4 to 10.
     - Tremor hit each of three husks across its fan for 7.
     - In a 10-deep pool the player sank about 5 blocks in 1.5 s.
+
+## M4 notes (2026-10-10): Prismborn, Stormborn and Dawnborn
+
+- **Ported systems:**
+  - lightning arcs (`ArcOptions`, `LightningArcParticle`, `GlowMesh`), Chain Lightning's chain
+    (`ChainLightnings`) and Stormcall's cloud (`Stormcalls`, `StormcloudParticle`);
+  - Prism Bolt and its shards, Prism Ward (`PrismWards`), and the Geode Sentinel entity, its
+    renderer and its crystal shards (`CrystalShards`);
+  - Smite (`Smites`, `SmiteParticle`), Sanctuary (`Sanctuaries`) and Dawnbreak (`Dawnbreaks`,
+    `DawnSunParticle`).
+- **Fixed strengths:**
+  - Chain Lightning is Elemental Arcana's level 4: range 26, jumps of 8 blocks, four jumps,
+    each strike 0.9 of the last; conduction ×1.5 and two more jumps from soaked foes; a short
+    jolt. Thunder Lord and Ball Lightning are gone.
+  - Prism Bolt is its level 4: 7.2 damage, pierces one, and bursts into five shards (3 each) on
+    every hit. Twin bolts, Crystal Shell, Resonance, splitting and the Crystal Spire are gone, so
+    the spire's shaft drawing now lives in `client/CrystalShaft`.
+  - Smite is its level 4: 3.5 blocks, after 0.5 s, with Consecration.
+  - Thunderclap, Stormcall, Prism Ward, Geode Sentinel, Sanctuary and Dawnbreak are as
+    Elemental Arcana has them (they had no levels).
+- **New power types:**
+  - `arcanaorigins:ore_sense` (radius 8, every 5 s). The server sends the `c:ores` blocks nearby
+    in `OreSensePayload`, our first packet (`network/ModNetwork`). `OreSenseRenderer` outlines
+    them through the rock in each ore's colour for 2 s.
+  - The outlines use a line render type with the "always" depth test. That shard only skips
+    enabling the depth test, and the test is on at this stage, so the renderer turns it off
+    around its draw.
+  - `arcanaorigins:undead_bane` sets the undead within 4 blocks alight, each second, for 3 s.
+- **Passives from NeoOrigins' JSON:**
+  - Stormborn: lightning damage ×0, Speed II while it thunders (`neoorigins:thundering`), and
+    1 damage a second in water (not rain).
+  - Prismborn: breaks blocks ×1.25; explosions ×1.5 (`#minecraft:is_explosion`).
+  - Dawnborn: Regeneration in the sun (`exposed_to_sun`); Weakness where the light is below 5
+    (`light_level`, which includes the night sky).
+- **Measured (200-health husks):**
+  - Stormborn:
+    - Chain Lightning struck three husks in a row: 5, 4.5 and 4.05.
+    - Thunderclap hit each for 4.
+    - Stormcall dealt 14–16 to each over its 10 s.
+  - Prismborn:
+    - Prism Bolt hit for 7.2.
+    - Prism Ward sent a skeleton's arrow back at it (−2).
+    - The Geode Sentinel grew.
+    - Ore Sense outlined buried diamond, gold and iron ore through the stone.
+  - Dawnborn:
+    - Smite hit a husk for 11.5 and set it alight.
+    - Sanctuary mended 7.3 health in 2 s.
+    - Dawnbreak dealt 2.5 a second (plus burning) to a husk 3 blocks away.
+    - Daylight Soul set a husk beside the player on fire.

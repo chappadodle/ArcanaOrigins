@@ -1,0 +1,15 @@
+{
+  "name": "origins.arcanaorigins.stormborn.name",
+  "description": "origins.arcanaorigins.stormborn.description",
+  "icon": "minecraft:lightning_rod",
+  "impact": "medium",
+  "order": 106,
+  "powers": [
+    "arcanaorigins:stormborn_chain_lightning",
+    "arcanaorigins:stormborn_thunderclap",
+    "arcanaorigins:stormborn_stormcall",
+    "arcanaorigins:stormborn_lightning_immunity",
+    "arcanaorigins:stormborn_storm_rider",
+    "arcanaorigins:stormborn_short_circuit"
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "thunderclap",
+  "cooldown_ticks": 240,
+  "cooldown_icon": "minecraft:copper_bulb"
+}

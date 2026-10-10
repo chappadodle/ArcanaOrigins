@@ -1,0 +1,15 @@
+{
+  "name": "origins.arcanaorigins.prismborn.name",
+  "description": "origins.arcanaorigins.prismborn.description",
+  "icon": "minecraft:amethyst_shard",
+  "impact": "medium",
+  "order": 105,
+  "powers": [
+    "arcanaorigins:prismborn_prism_bolt",
+    "arcanaorigins:prismborn_prism_ward",
+    "arcanaorigins:prismborn_geode_sentinel",
+    "arcanaorigins:prismborn_ore_sense",
+    "arcanaorigins:prismborn_crystal_hands",
+    "arcanaorigins:prismborn_brittle"
+  ]
+}

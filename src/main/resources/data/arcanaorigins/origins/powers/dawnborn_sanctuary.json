@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "sanctuary",
+  "cooldown_ticks": 600,
+  "cooldown_icon": "minecraft:golden_apple"
+}

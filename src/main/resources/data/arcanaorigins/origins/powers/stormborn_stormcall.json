@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "stormcall",
+  "cooldown_ticks": 1500,
+  "cooldown_icon": "minecraft:trident"
+}

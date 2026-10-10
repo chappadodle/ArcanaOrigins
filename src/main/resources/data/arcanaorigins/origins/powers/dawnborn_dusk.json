@@ -1,0 +1,12 @@
+{
+  "type": "neoorigins:persistent_effect",
+  "effect": "minecraft:weakness",
+  "amplifier": 0,
+  "toggleable": false,
+  "show_icon": true,
+  "condition": {
+    "type": "neoorigins:light_level",
+    "comparison": "<",
+    "compare_to": 5
+  }
+}

@@ -1,0 +1,80 @@
+# Prismborn (see the design spec): Prism Bolt at a slowed 200-health husk (it bursts into shards),
+# Prism Ward against a skeleton's arrows, the Geode Sentinel, and Ore Sense (diamond ore buried under
+# the player glows through the stone). Shots; health logged.
+hud on
+cmd time set noon
+cmd weather clear
+cmd gamerule doDaylightCycle false
+cmd gamerule doMobSpawning false
+cmd gamerule mobGriefing false
+cmd gamemode survival
+cmd effect clear @s
+cmd effect give @s minecraft:instant_health 1 10 true
+cmd tp @s 0.5 100 0.5 -90 0
+wait 40
+cmd kill @e[type=!player]
+cmd fill -8 99 -12 30 99 12 minecraft:stone
+cmd fill -8 100 -12 30 110 12 minecraft:air
+cmd origin set @s neoorigins:origin arcanaorigins:prismborn
+wait 20
+screen close
+cmd summon husk 9.5 100 0.5 {PersistenceRequired:1b,Health:200f,attributes:[{id:"minecraft:generic.max_health",base:200d}]}
+cmd effect give @e[type=husk] minecraft:slowness 200 255 true
+cmd effect give @e[type=husk] minecraft:weakness 200 255 true
+wait 10
+cmd tp @s 0.5 100 0.5 -90 3
+wait 5
+# 1. Prism Bolt.
+skill 1
+wait 3
+shot prism_bolt_flight
+wait 10
+shot prism_bolt_burst
+wait 10
+cmd execute as @e[type=husk] run data get entity @s Health
+# 2. Prism Ward, a skeleton shooting at the player.
+cmd kill @e[type=husk]
+cmd summon skeleton 12.5 100 0.5 {PersistenceRequired:1b,Rotation:[90f,0f]}
+cmd effect give @e[type=skeleton] minecraft:slowness 200 255 true
+cmd effect give @s minecraft:resistance 30 4 true
+wait 5
+skill 2
+camera back
+wait 40
+shot prism_ward
+camera first
+cmd execute as @e[type=skeleton] run data get entity @s Health
+cmd kill @e[type=skeleton]
+cmd effect clear @s
+# 3. Geode Sentinel ahead, a husk near it.
+cmd summon husk 9.5 100 3.5 {PersistenceRequired:1b}
+cmd effect give @e[type=husk] minecraft:slowness 200 255 true
+cmd tp @s 0.5 100 0.5 -90 25
+wait 5
+skill 3
+wait 30
+shot geode_sentinel
+cmd kill @e[type=husk]
+# 4. Ore Sense: diamond and iron ore a few blocks down.
+cmd setblock 2 96 0 minecraft:stone
+cmd setblock 2 96 0 minecraft:diamond_ore
+cmd setblock -1 95 2 minecraft:stone
+cmd setblock -1 95 2 minecraft:iron_ore
+cmd setblock 1 97 -3 minecraft:stone
+cmd setblock 1 97 -3 minecraft:gold_ore
+cmd tp @s 0.5 100 0.5 -90 70
+# A pulse every 5 seconds, shown for 2: a shot each second catches one.
+wait 20
+shot ore_sense_0
+wait 20
+shot ore_sense_1
+wait 20
+shot ore_sense_2
+wait 20
+shot ore_sense_3
+wait 20
+shot ore_sense_4
+wait 20
+shot ore_sense_5
+wait 10
+quit

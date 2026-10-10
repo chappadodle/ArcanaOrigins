@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:undead_bane",
+  "radius": 4.0,
+  "interval": 20,
+  "burn_ticks": 60
+}

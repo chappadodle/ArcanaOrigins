@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "prism_ward",
+  "cooldown_ticks": 400,
+  "cooldown_icon": "minecraft:tinted_glass"
+}

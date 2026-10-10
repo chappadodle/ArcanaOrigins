@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "geode_sentinel",
+  "cooldown_ticks": 1200,
+  "cooldown_icon": "minecraft:amethyst_cluster"
+}

@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "prism_bolt",
+  "cooldown_ticks": 30,
+  "cooldown_icon": "minecraft:amethyst_shard"
+}

@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "dawnbreak",
+  "cooldown_ticks": 1800,
+  "cooldown_icon": "minecraft:sunflower"
+}
