@@ -1,0 +1,17 @@
+{
+  "name": "origins.arcanaorigins.stoneborn.name",
+  "description": "origins.arcanaorigins.stoneborn.description",
+  "icon": "minecraft:cobblestone",
+  "impact": "medium",
+  "order": 104,
+  "powers": [
+    "arcanaorigins:stoneborn_boulder",
+    "arcanaorigins:stoneborn_stone_skin",
+    "arcanaorigins:stoneborn_tremor",
+    "arcanaorigins:stoneborn_natural_armor",
+    "arcanaorigins:stoneborn_steadfast",
+    "arcanaorigins:stoneborn_stonecutter",
+    "arcanaorigins:stoneborn_sinks",
+    "arcanaorigins:stoneborn_heavy"
+  ]
+}

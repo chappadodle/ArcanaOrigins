@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "boulder",
+  "cooldown_ticks": 40,
+  "cooldown_icon": "minecraft:cobblestone"
+}

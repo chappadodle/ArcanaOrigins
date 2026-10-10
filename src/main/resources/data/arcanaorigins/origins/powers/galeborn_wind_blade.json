@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "wind_blade",
+  "cooldown_ticks": 20,
+  "cooldown_icon": "minecraft:wind_charge"
+}

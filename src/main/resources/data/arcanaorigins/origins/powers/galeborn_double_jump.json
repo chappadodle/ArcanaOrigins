@@ -1,0 +1,7 @@
+{
+  "type": "arcanaorigins:air_jump",
+  "key": "key.jump",
+  "velocity": 0.7,
+  "cooldown_ticks": 30,
+  "cooldown_icon": "minecraft:phantom_membrane"
+}

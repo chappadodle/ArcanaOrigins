@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "gale_dash",
+  "cooldown_ticks": 80,
+  "cooldown_icon": "minecraft:feather"
+}

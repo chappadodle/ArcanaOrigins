@@ -3,6 +3,7 @@ package com.chappadodle.arcanaorigins.content;
 import com.chappadodle.arcanaorigins.ArcanaOrigins;
 import com.chappadodle.arcanaorigins.api.SpellProjectile;
 import com.chappadodle.arcanaorigins.content.spell.EmberSprite;
+import com.chappadodle.arcanaorigins.content.spell.StormeyeEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleType;
@@ -38,6 +39,11 @@ public final class ModMagic {
             ENTITY_TYPES.register("ember_sprite", () -> EntityType.Builder.<EmberSprite>of(EmberSprite::new, MobCategory.MISC)
                     .sized(0.4f, 0.4f).clientTrackingRange(8).updateInterval(4).fireImmune()
                     .build(ArcanaOrigins.MODID + ":ember_sprite"));
+    /** Galeborn's Stormeye tornado (see StormeyeEntity): never saved. */
+    public static final DeferredHolder<EntityType<?>, EntityType<StormeyeEntity>> STORMEYE =
+            ENTITY_TYPES.register("stormeye", () -> EntityType.Builder.<StormeyeEntity>of(StormeyeEntity::new, MobCategory.MISC)
+                    .sized(1f, 2f).clientTrackingRange(10).updateInterval(2).fireImmune().noSave()
+                    .build(ArcanaOrigins.MODID + ":stormeye"));
 
     /** A glowing 4-point frost glint that twinkles out. */
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FROST_SPARKLE =
@@ -51,6 +57,15 @@ public final class ModMagic {
     /** A glowing spark that drifts up and cools as it fades. */
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> EMBER =
             PARTICLES.register("ember", () -> new SimpleParticleType(false));
+    /** A pale curl of wind that glides along its velocity and fades. */
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> WIND_STREAK =
+            PARTICLES.register("wind_streak", () -> new SimpleParticleType(false));
+    /** A Wind Blade's whole impact in one particle (see WindCutOptions). */
+    public static final DeferredHolder<ParticleType<?>, ParticleType<WindCutOptions>> WIND_CUT =
+            PARTICLES.register("wind_cut", WindCutOptions::newType);
+    /** A Tremor's front, for as long as it runs, in one particle (see TremorOptions). */
+    public static final DeferredHolder<ParticleType<?>, ParticleType<TremorOptions>> TREMOR =
+            PARTICLES.register("tremor", TremorOptions::newType);
     /** A wind curl tinted with an element's color, for Swirl rings. */
     public static final DeferredHolder<ParticleType<?>, ParticleType<ColorParticleOption>> SWIRL =
             PARTICLES.register("swirl", () -> new ParticleType<ColorParticleOption>(false) {

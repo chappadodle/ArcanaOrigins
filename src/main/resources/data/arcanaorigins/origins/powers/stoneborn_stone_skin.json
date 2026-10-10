@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "stone_skin",
+  "cooldown_ticks": 500,
+  "cooldown_icon": "minecraft:polished_andesite"
+}

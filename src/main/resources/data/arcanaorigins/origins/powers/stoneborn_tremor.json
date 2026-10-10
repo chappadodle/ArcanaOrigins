@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "tremor",
+  "cooldown_ticks": 900,
+  "cooldown_icon": "minecraft:cracked_stone_bricks"
+}

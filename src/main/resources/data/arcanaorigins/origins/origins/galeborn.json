@@ -1,0 +1,16 @@
+{
+  "name": "origins.arcanaorigins.galeborn.name",
+  "description": "origins.arcanaorigins.galeborn.description",
+  "icon": "minecraft:wind_charge",
+  "impact": "medium",
+  "order": 103,
+  "powers": [
+    "arcanaorigins:galeborn_wind_blade",
+    "arcanaorigins:galeborn_gale_dash",
+    "arcanaorigins:galeborn_stormeye",
+    "arcanaorigins:galeborn_double_jump",
+    "arcanaorigins:galeborn_no_fall_damage",
+    "arcanaorigins:galeborn_frail",
+    "arcanaorigins:galeborn_featherweight"
+  ]
+}

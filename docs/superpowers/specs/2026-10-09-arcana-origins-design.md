@@ -252,3 +252,48 @@ Read from NeoOrigins' 1.21.1 source (2.2.29):
   - Tideborn: Hydro Jet 12 (and Wet), Bubble Prison traps, Tsunami 4.
   - Rimeborn: Icicle 7, Frost Nova 7, leaving the husk Frozen in its shell.
   - Frost Walker froze a pool's edge.
+
+## M3 notes (2026-10-10): Galeborn and Stoneborn
+
+- **Ported systems:**
+  - the Wind Blade's slash (`WindSlashRenderer`, drawn through `ProjectileVisuals`, now keyed
+    by spell name) and its impact (`WindCutOptions`, `WindCutEmitter`);
+  - the Stormeye tornado (`StormeyeEntity`, renderer, wind funnel);
+  - Tremor's shockwave (`Tremors`, `TremorOptions`, `TremorEmitter`, stone spikes);
+  - the Boulder and Stone Skin's orbiting stones.
+
+  `SpellProjectile` keeps a one-blade "formation" (`formationSlot` 0, `formationCount` 1) so
+  the wind visuals read as they did.
+- **Wind Blade:** one crescent at Elemental Arcana's Gale look. Speed 2.8, 6 damage, pierces
+  one foe, knockback 1.0, Swirls, and thins out after 20 ticks (about 15 blocks).
+- **Gale Dash:** a tap dash. It goes any way in mid-air and shoves foes aside along its trail.
+  Nothing hurts the dasher for its 8 ticks, and a tailwind (Speed II, 2 s) follows. Charges,
+  branches and the fall-immunity flag are gone, since Galeborn never takes fall damage anyway.
+- **Stormeye (the ultimate):** Elemental Arcana's at its level 7. Reach 7, 5 s, 2.25 every half
+  second, Absorption and Swirl. The level-9 eye hold and the Airborne status are dropped.
+- **Boulder:** speed 1.4 in an arc, bounces once, radius 1.8, 8 damage. It staggers the creature
+  it hit for 15 ticks. Crystallize is dropped, as everywhere.
+- **Stone Skin:** absorbs 8 for 10 s, with +6 armour and full knockback resistance while it's
+  up (Elemental Arcana's Bastion, made the base). It keeps Thorns and Brace, and breaking it
+  shoves foes away.
+- **Tremor (the ultimate):** three shockwaves in a 25° fan, 14 blocks each. Each creature is hit
+  once between them for 7, thrown up, rooted for 1 s and slowed.
+- **New power type, `arcanaorigins:air_jump` (Galeborn's Updraft):** an active power bound to
+  `"key": "key.jump"`. It fires in mid-air only and has a 1.5 s cooldown, so one jump per fall.
+  NeoOrigins keeps vanilla-key powers off the skill slots.
+  - It sets the motion outright: y 0.7, keeping last tick's horizontal movement.
+  - NeoOrigins' `add_velocity` pushes the server's copy of a player's motion. That copy is stale,
+    because the client moves players, so the boost was lost; the autotest's height trace caught it.
+- **Passives from NeoOrigins' JSON:**
+  - Galeborn: no fall damage; max health −6; knockback taken ×1.5 (`action_on_event` `mod_knockback`).
+  - Stoneborn: +4 armour, +0.5 knockback resistance, stone broken ×1.5, `prevent_action` `swim`
+    (sinks) and speed −10%.
+- **Measured (200-health husk):**
+  - Galeborn:
+    - Wind Blade 6; Gale Dash carried the player 8.4 blocks; Stormeye 20.25 (nine hits).
+    - The double jump peaks 1.9 blocks above a plain jump's top.
+    - A 20-block fall did no damage; max health is 14.
+  - Stoneborn:
+    - Boulder 8; Stone Skin took armour from 4 to 10.
+    - Tremor hit each of three husks across its fan for 7.
+    - In a 10-deep pool the player sank about 5 blocks in 1.5 s.

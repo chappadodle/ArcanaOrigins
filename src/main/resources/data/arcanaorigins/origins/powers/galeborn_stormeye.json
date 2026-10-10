@@ -1,0 +1,6 @@
+{
+  "type": "arcanaorigins:spell",
+  "spell": "stormeye",
+  "cooldown_ticks": 1200,
+  "cooldown_icon": "minecraft:breeze_rod"
+}

@@ -3,6 +3,7 @@ package com.chappadodle.arcanaorigins.client;
 import com.chappadodle.arcanaorigins.api.Glow;
 import com.chappadodle.arcanaorigins.api.ProjectileSpell;
 import com.chappadodle.arcanaorigins.api.SpellProjectile;
+import com.chappadodle.arcanaorigins.client.visual.ProjectileVisuals;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
@@ -49,6 +50,14 @@ public class SpellProjectileRenderer extends EntityRenderer<SpellProjectile> {
         float pitch = (float) -Mth.atan2(direction.y, Math.sqrt(direction.x * direction.x + direction.z * direction.z));
         float scale = Mth.lerp(projectile.charge(partialTick), MIN_SCALE, 1f) * projectile.visualScale() * projectile.viewScale();
 
+        ProjectileVisuals.Visual visual = ProjectileVisuals.get(spell.name());
+        if (visual != null) {
+            poseStack.pushPose();
+            poseStack.translate(shift.x, shift.y, shift.z);
+            visual.render(projectile, direction, scale, partialTick, poseStack, buffers);
+            poseStack.popPose();
+            return;
+        }
         ResourceLocation modelId = spell.model(projectile.variant());
         if (modelId == null) {
             return;

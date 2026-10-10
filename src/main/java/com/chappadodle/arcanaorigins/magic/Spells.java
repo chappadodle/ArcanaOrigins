@@ -2,6 +2,12 @@ package com.chappadodle.arcanaorigins.magic;
 
 import com.chappadodle.arcanaorigins.ArcanaOrigins;
 import com.chappadodle.arcanaorigins.api.ProjectileSpells;
+import com.chappadodle.arcanaorigins.content.spell.WindBladeSpell;
+import com.chappadodle.arcanaorigins.content.spell.GaleDashSpell;
+import com.chappadodle.arcanaorigins.content.spell.StormeyeSpell;
+import com.chappadodle.arcanaorigins.content.spell.BoulderSpell;
+import com.chappadodle.arcanaorigins.content.spell.StoneSkinSpell;
+import com.chappadodle.arcanaorigins.content.spell.TremorSpell;
 import com.chappadodle.arcanaorigins.content.spell.BubblePrisonSpell;
 import com.chappadodle.arcanaorigins.content.spell.EmberSpriteSpell;
 import com.chappadodle.arcanaorigins.content.spell.FrostNovaSpell;
@@ -39,6 +45,14 @@ public final class Spells {
         register("hydro_jet", new HydroJetSpell());
         register("bubble_prison", new BubblePrisonSpell());
         register("tsunami", new TsunamiSpell());
+        // Galeborn (Wind).
+        register(WindBladeSpell.NAME, ProjectileSpells.register(new WindBladeSpell()));
+        register(GaleDashSpell.NAME, new GaleDashSpell());
+        register(StormeyeSpell.NAME, new StormeyeSpell());
+        // Stoneborn (Earth).
+        register(BoulderSpell.NAME, ProjectileSpells.register(new BoulderSpell()));
+        register(StoneSkinSpell.NAME, new StoneSkinSpell());
+        register(TremorSpell.NAME, new TremorSpell());
         // A test spell: a puff of sparks and a log line (tools/server_tests check the wiring with it).
         register("spark", caster -> {
             caster.serverLevel().sendParticles(ParticleTypes.ELECTRIC_SPARK, caster.getX(), caster.getEyeY(), caster.getZ(),

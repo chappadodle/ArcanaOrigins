@@ -2,6 +2,8 @@
   "origins": [
     "arcanaorigins:emberborn",
     "arcanaorigins:tideborn",
-    "arcanaorigins:rimeborn"
+    "arcanaorigins:rimeborn",
+    "arcanaorigins:galeborn",
+    "arcanaorigins:stoneborn"
   ]
 }

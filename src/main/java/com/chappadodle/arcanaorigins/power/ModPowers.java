@@ -14,6 +14,7 @@ public final class ModPowers {
     public static final DeferredHolder<PowerType<?>, SpellPower> SPELL = POWER_TYPES.register("spell", SpellPower::new);
     public static final DeferredHolder<PowerType<?>, AuraBonusPower> AURA_BONUS = POWER_TYPES.register("aura_bonus", AuraBonusPower::new);
     public static final DeferredHolder<PowerType<?>, FrostWalkPower> FROST_WALK = POWER_TYPES.register("frost_walk", FrostWalkPower::new);
+    public static final DeferredHolder<PowerType<?>, AirJumpPower> AIR_JUMP = POWER_TYPES.register("air_jump", AirJumpPower::new);
 
     private ModPowers() {
     }

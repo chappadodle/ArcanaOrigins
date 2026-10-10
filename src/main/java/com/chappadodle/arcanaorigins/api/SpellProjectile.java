@@ -99,6 +99,15 @@ public class SpellProjectile extends ThrowableProjectile {
         return false;
     }
 
+    /** Its place in a held formation: always the only one (kept so the ported visuals read as they did). */
+    public int formationSlot() {
+        return 0;
+    }
+
+    public int formationCount() {
+        return 1;
+    }
+
     /** No first-person shrinking (nothing is held before the eyes). */
     public float viewScale() {
         return 1f;

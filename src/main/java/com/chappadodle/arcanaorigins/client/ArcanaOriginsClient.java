@@ -25,6 +25,12 @@ import com.chappadodle.arcanaorigins.client.particle.GlowParticle;
 import com.chappadodle.arcanaorigins.client.particle.IceShardParticle;
 import com.chappadodle.arcanaorigins.client.particle.PyronadoEmitter;
 import com.chappadodle.arcanaorigins.client.particle.WindStreakParticle;
+import com.chappadodle.arcanaorigins.client.particle.TremorEmitter;
+import com.chappadodle.arcanaorigins.client.particle.WindCutEmitter;
+import com.chappadodle.arcanaorigins.client.visual.ProjectileVisuals;
+import com.chappadodle.arcanaorigins.client.visual.WindSlashRenderer;
+import com.chappadodle.arcanaorigins.content.spell.WindBladeSpell;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import com.chappadodle.arcanaorigins.content.ModMagic;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -53,10 +59,17 @@ public final class ArcanaOriginsClient {
         private Setup() {
         }
 
+        /** Spells drawn by their own code instead of a model. */
+        @SubscribeEvent
+        public static void clientSetup(FMLClientSetupEvent event) {
+            ProjectileVisuals.register(WindBladeSpell.NAME, WindSlashRenderer::render);
+        }
+
         @SubscribeEvent
         public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
             event.registerEntityRenderer(ModMagic.SPELL_PROJECTILE.get(), SpellProjectileRenderer::new);
             event.registerEntityRenderer(ModMagic.EMBER_SPRITE.get(), EmberSpriteRenderer::new);
+            event.registerEntityRenderer(ModMagic.STORMEYE.get(), StormeyeRenderer::new);
         }
 
         @SubscribeEvent
@@ -66,6 +79,9 @@ public final class ArcanaOriginsClient {
             event.registerSpriteSet(ModMagic.FROST_MIST.get(), FrostMistParticle.Provider::new);
             event.registerSpriteSet(ModMagic.EMBER.get(), EmberParticle.Provider::new);
             event.registerSpriteSet(ModMagic.SWIRL.get(), WindStreakParticle.SwirlProvider::new);
+            event.registerSpriteSet(ModMagic.WIND_STREAK.get(), WindStreakParticle.Provider::new);
+            event.registerSpecial(ModMagic.WIND_CUT.get(), new WindCutEmitter.Provider());
+            event.registerSpecial(ModMagic.TREMOR.get(), new TremorEmitter.Provider());
             event.registerSpriteSet(ModMagic.FLARE.get(), sprites -> new GlowParticle.Provider(GlowParticle.Kind.FLARE, sprites));
             event.registerSpriteSet(ModMagic.SPARK.get(), sprites -> new GlowParticle.Provider(GlowParticle.Kind.SPARK, sprites));
             event.registerSpriteSet(ModMagic.FEATHER.get(), sprites -> new GlowParticle.Provider(GlowParticle.Kind.FEATHER, sprites));

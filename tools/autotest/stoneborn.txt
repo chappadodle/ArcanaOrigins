@@ -1,0 +1,70 @@
+# Stoneborn (see the design spec): its three spells on the skill keys at slowed 200-health husks
+# (shots; health logged after each), Stone Skin's armour and its stones seen from behind, and that
+# a Stoneborn sinks in water (height logged as they go down).
+hud on
+cmd time set noon
+cmd weather clear
+cmd gamerule doDaylightCycle false
+cmd gamerule doMobSpawning false
+cmd gamerule mobGriefing false
+cmd gamemode survival
+cmd effect clear @s
+cmd effect give @s minecraft:instant_health 1 10 true
+cmd tp @s 0.5 100 0.5 -90 0
+wait 40
+cmd kill @e[type=!player]
+cmd fill -8 99 -12 30 99 12 minecraft:stone
+cmd fill -8 100 -12 30 110 12 minecraft:air
+cmd origin set @s neoorigins:origin arcanaorigins:stoneborn
+wait 20
+screen close
+cmd summon husk 9.5 100 0.5 {PersistenceRequired:1b,Health:200f,attributes:[{id:"minecraft:generic.max_health",base:200d}]}
+cmd effect give @e[type=husk] minecraft:slowness 200 255 true
+cmd effect give @e[type=husk] minecraft:weakness 200 255 true
+wait 10
+cmd tp @s 0.5 100 0.5 -90 3
+wait 5
+cmd attribute @s minecraft:generic.armor get
+# 1. Boulder.
+skill 1
+wait 3
+shot boulder_flight
+wait 20
+cmd data get entity @e[type=husk,limit=1] Health
+shot boulder_hit
+# 2. Stone Skin, from behind; armour while it's up.
+skill 2
+wait 10
+camera back
+wait 5
+shot stone_skin
+cmd attribute @s minecraft:generic.armor get
+camera first
+wait 30
+# 3. Tremor, at three husks spread across its fan (the first one back in place: the boulder shoved it).
+cmd tp @e[type=husk] 9.5 100 0.5
+cmd summon husk 8.5 100 4.5 {PersistenceRequired:1b,Health:200f,attributes:[{id:"minecraft:generic.max_health",base:200d}]}
+cmd summon husk 8.5 100 -3.5 {PersistenceRequired:1b,Health:200f,attributes:[{id:"minecraft:generic.max_health",base:200d}]}
+cmd effect give @e[type=husk] minecraft:slowness 200 255 true
+cmd effect give @e[type=husk] minecraft:weakness 200 255 true
+cmd tp @s 0.5 100 0.5 -90 20
+wait 5
+skill 3
+wait 8
+shot tremor
+wait 20
+cmd execute as @e[type=husk] run data get entity @s Health
+# 4. Like a Rock: a deep pool; the player sinks.
+cmd kill @e[type=husk]
+cmd fill 4 90 -3 8 99 3 minecraft:water
+cmd tp @s 6.5 99 0.5 -90 0
+wait 10
+cmd data get entity @s Pos[1]
+wait 30
+cmd data get entity @s Pos[1]
+shot sinking
+cmd fill 4 90 -3 8 99 3 minecraft:stone
+cmd tp @s 0.5 100 0.5 -90 0
+cmd kill @e[type=!player]
+wait 10
+quit
